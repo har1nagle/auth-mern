@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
   }
 };
 
-
+//verify email
 export const verifyEmail = async (req, res) => {
   // 1 2 3 4 5 6
   const { code } = req.body;
@@ -100,5 +100,6 @@ export const login = async (req, res) => {
   res.send("signup route");
 }
 export const logout = async (req, res) => {
-  res.send("signup route");
+  res.clearCookie("token");
+  res.status(200).json({ success: true, message: "Logged out successfully " });
 }
