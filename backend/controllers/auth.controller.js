@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 import { User } from "../models/user.model.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
-import { sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail} from "../mailtrap/emails.js";
+import { sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail, sendResetSuccessEmail} from "../mailtrap/emails.js";
 
 
 
@@ -97,7 +97,6 @@ export const verifyEmail = async (req, res) => {
 
 }
 
-
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -128,11 +127,11 @@ export const login = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 }
+
 export const logout = async (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ success: true, message: "Logged out successfully " });
 }
-
 
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
@@ -161,5 +160,34 @@ export const forgotPassword = async (req, res) => {
     console.log("Error in forgotePassword", error);
     res.status(400).json({ success: false, message: error.message });
     
+  }
+}
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpireAt: { $gt: Date.now() },
+    })
+    if (!user) {
+      return res.status(400).json({ success: false, message: "Invalid or expired reset token" });
+    }
+
+    //update password
+    const hashedPassword = await bcryptjs.hash(password, 10);    
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpireAt = undefined;
+    await user.save();
+
+    await sendResetSuccessEmail(user.email);
+    res.status(200).json({ success: true, message: "Password reset successfully" });
+  } catch (error) {
+    console.log("Error in resetPassword", error);
+    res.status(400).json({ success: false, message: error.message });
+
   }
 }
