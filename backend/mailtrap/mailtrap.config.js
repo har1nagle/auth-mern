@@ -7,7 +7,7 @@ export const mailtrapClient = new MailtrapClient({token: process.env.MAILTRAP_TO
 
 export const sender = {
   email: "mailtrap@demomailtrap.com",
-  name: "Hari Nagle",
+  name: "no reply",
 };
 
 
