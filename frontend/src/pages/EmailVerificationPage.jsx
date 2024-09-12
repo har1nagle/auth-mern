@@ -64,7 +64,7 @@ const EmailVerificationPage = () => {
 
   // Auto sumbit when all fields are filled
   useEffect(() => {
-    if (code.every((digit) => digit !== '')) {
+    if (code.every((digit) => digit !== "")) {
       handleSubmit(new Event("submit"));
     }
   },[code])

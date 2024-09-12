@@ -1,19 +1,20 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+{
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
 
   password: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   lastLogin: {
     type: Date,
@@ -21,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   isVarified: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   resetPasswordToken: String,

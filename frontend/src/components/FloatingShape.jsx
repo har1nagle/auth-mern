@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 
-const FloatingShape = ({color, size, top, left, delay}) => {
+const FloatingShape = ({ color, size, top, left, delay }) => {
   return (
     <motion.div
       className={`absolute rounded-full ${color} ${size} opacity-20 blur-xl `}
-      style={{top,left}}
+      style={{ top, left }}
       animate={{
-        y: [ "0%", "100%", "0%"],
+        y: ["0%", "100%", "0%"],
         x: ["0%", "100%", "0%"],
         rotate: [0, 360],
       }}
@@ -17,9 +17,9 @@ const FloatingShape = ({color, size, top, left, delay}) => {
         repeat: Infinity,
         delay
       }}
-      aria-hidden = "true"
+      aria-hidden="true"
     />
-  )
-}
+  );
+};
 
 export default FloatingShape

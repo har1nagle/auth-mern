@@ -34,7 +34,10 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": "off",
-      "react/no-unescaped-entities":"off"
+      "react/no-unescaped-entities": "off",
+      
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
     },
   },
 ];
