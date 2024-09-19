@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import FloatingShape from "./components/FloatingShape"
+import LoadingSpinner from "./components/LoadingSpinner";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage"
@@ -36,8 +37,7 @@ function App() {
   useEffect(() => {
     checkAuth()
   }, [checkAuth]);
-  console.log("isAuthenticated", isAuthenticated);
-  console.log("user", user);
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
     <div
