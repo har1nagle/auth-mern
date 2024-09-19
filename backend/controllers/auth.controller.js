@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
   try {
 
     if (!email || !password || !name) {
-      throw new Error("All fields are requiresd")
+      throw new Error("All fields are required");
     }
 
     const userAlreadyExists = await User.findOne({ email })
@@ -80,7 +80,7 @@ export const verifyEmail = async (req, res) => {
       return res.status(400).json({ success: false, message: "Invalid or expired verification code" })
     }
 
-    user.isVarified = true;
+    user.isVerified = true;
     user.verificationToken = undefined;
     user.verificationTokenExpiresAt = undefined;
     await user.save();
@@ -162,7 +162,7 @@ export const forgotPassword = async (req, res) => {
 
   } catch (error) {
 
-    console.log("Error in forgotePassword", error);
+    console.log("Error in forgot Password", error);
     res.status(400).json({ success: false, message: error.message });
     
   }
