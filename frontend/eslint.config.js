@@ -36,8 +36,8 @@ export default [
       "react/prop-types": "off",
       "react/no-unescaped-entities": "off",
       
-      // "no-unused-vars": "off",
-      // "@typescript-eslint/no-unused-vars": ["error"],
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
     },
   },
 ];

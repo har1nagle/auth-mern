@@ -6,7 +6,8 @@ import LoginPage from "./pages/LoginPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage"
 import DashboardPage from "./pages/DashboardPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import {Toaster} from 'react-hot-toast'
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import { Toaster } from 'react-hot-toast'
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 
@@ -68,11 +69,12 @@ function App() {
       />
 
       <Routes>
-        <Route path="/"
+        <Route
+          path="/"
           element={
             <ProtectedRoute>
-              <DashboardPage/>
-            </ProtectedRoute> 
+              <DashboardPage />
+            </ProtectedRoute>
           }
         />
         <Route
@@ -92,9 +94,23 @@ function App() {
           }
         />
         <Route path="/verify-email" element={<EmailVerificationPage />} />
-        <Route path="/forgot-password" element={<RedirectAuthenticatedUser>
-          <ForgotPasswordPage />
-        </RedirectAuthenticatedUser>} />
+        <Route
+          path="/forgot-password"
+          element={
+            <RedirectAuthenticatedUser>
+              <ForgotPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectAuthenticatedUser>
+              <ResetPasswordPage/>
+            </RedirectAuthenticatedUser>
+          }
+        />
       </Routes>
       <Toaster />
     </div>
